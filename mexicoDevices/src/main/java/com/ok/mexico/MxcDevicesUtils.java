@@ -1,4 +1,4 @@
-package com.ok.moxico;
+package com.ok.mexico;
 
 
 import android.annotation.SuppressLint;
@@ -35,7 +35,6 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.annotation.RequiresApi;
 import androidx.core.os.ConfigurationCompat;
 import androidx.core.os.LocaleListCompat;
 

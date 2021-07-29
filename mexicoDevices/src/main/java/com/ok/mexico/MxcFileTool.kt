@@ -1,29 +1,12 @@
-package com.ok.moxico
+package com.ok.mexico
 
 import android.annotation.SuppressLint
-import android.annotation.TargetApi
-import android.content.ContentUris
-import android.content.ContentValues
-import android.content.Context
-import android.content.Intent
-import android.database.Cursor
-import android.net.Uri
-import android.os.Build
 import android.os.Build.VERSION
 import android.os.Environment
 import android.os.StatFs
-import android.provider.DocumentsContract
-import android.provider.MediaStore
 import android.text.TextUtils
-import android.util.Base64
-import android.util.Log
-import androidx.core.content.FileProvider
 import java.io.*
 import java.lang.Exception
-import java.nio.ByteBuffer
-import java.nio.channels.FileChannel
-import java.nio.charset.StandardCharsets
-import java.util.*
 
 
 class MxcFileTool {

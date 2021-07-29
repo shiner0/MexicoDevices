@@ -1,4 +1,4 @@
-package com.ok.moxico
+package com.ok.mexico
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -31,7 +31,7 @@ import android.util.Xml
 import android.view.Surface
 import android.view.WindowManager
 import androidx.annotation.RequiresPermission
-import com.ok.moxico.MxcFileTool.Companion.sDCardPath
+import com.ok.mexico.MxcFileTool.Companion.sDCardPath
 import org.json.JSONObject
 import java.io.*
 import java.lang.reflect.InvocationTargetException

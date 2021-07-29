@@ -1,4 +1,4 @@
-package com.ok.moxico;
+package com.ok.mexico;
 
 
 import java.io.BufferedReader;

@@ -1,4 +1,4 @@
-package com.ok.moxico
+package com.ok.mexico
 
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
@@ -17,7 +17,6 @@ import android.text.TextUtils
 import android.util.Log
 import java.io.BufferedReader
 import java.io.FileReader
-import java.io.IOException
 import java.util.*
 
 

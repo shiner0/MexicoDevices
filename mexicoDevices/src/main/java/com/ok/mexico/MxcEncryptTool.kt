@@ -1,11 +1,8 @@
-package com.ok.moxico
+package com.ok.mexico
 
 
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
-import java.security.SecureRandom
-import javax.crypto.Cipher
-import javax.crypto.spec.SecretKeySpec
 
 
 object MxcEncryptTool {

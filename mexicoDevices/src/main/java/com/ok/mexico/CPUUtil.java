@@ -1,4 +1,4 @@
-package com.ok.moxico;
+package com.ok.mexico;
 
 import android.app.Activity;
 import android.app.ActivityManager;
