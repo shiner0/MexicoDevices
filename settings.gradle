@@ -1,0 +1,3 @@
+rootProject.name = "MexicoMaven"
+include ':app'
+include ':mexicoDevices'
