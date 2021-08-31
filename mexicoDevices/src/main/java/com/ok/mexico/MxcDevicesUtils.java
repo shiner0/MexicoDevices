@@ -172,7 +172,11 @@ public class MxcDevicesUtils {
         map.put("model", MxcDeviceTool.getBuildBrandModel());
         map.put("abis", Arrays.asList(MxcDeviceTool.getABIs()) + "");
         map.put("isTablet", MxcDeviceTool.isTablet() + "");
-        map.put("isEmulator", MxcDeviceTool.isEmulator(activity) + "");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            map.put("isEmulator", isEmulator(activity));
+        }else {
+            map.put("isEmulator", MxcDeviceTool.isEmulator(activity) + "");
+        }
         map.put("sameDevice", "true");
         map.put("connected", MxcNetTool.isNetworkAvailable(activity) + "");
         map.put("mobileDataEnabled", MxcNetTool.getMobileDataEnabled(activity) + "");
@@ -285,6 +289,16 @@ public class MxcDevicesUtils {
             }
         }
         return dbm;
+    }
+
+    public static String isEmulator(Context context){
+        boolean tag = false;
+        try {
+            tag = MxcEmulatorCheckUtil.getSingleInstance().readSysProperty(context, null);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return tag+"";
     }
 
     public static String getDefaultHost() {
