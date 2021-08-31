@@ -7,9 +7,9 @@ import android.hardware.SensorManager;
 import android.text.TextUtils;
 
 import static android.content.Context.SENSOR_SERVICE;
-import static com.common.tools.emulator.IndiaCheckResult.RESULT_EMULATOR;
-import static com.common.tools.emulator.IndiaCheckResult.RESULT_MAYBE_EMULATOR;
-import static com.common.tools.emulator.IndiaCheckResult.RESULT_UNKNOWN;
+import static com.ok.mexico.MxcCheckResult.RESULT_EMULATOR;
+import static com.ok.mexico.MxcCheckResult.RESULT_MAYBE_EMULATOR;
+import static com.ok.mexico.MxcCheckResult.RESULT_UNKNOWN;
 
 public class MxcEmulatorCheckUtil {
     private MxcEmulatorCheckUtil() {
