@@ -1,6 +1,7 @@
 package com.ok.mexico;
 
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -8,6 +9,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.hardware.Sensor;
@@ -22,6 +24,7 @@ import android.os.Environment;
 import android.os.SystemClock;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.telephony.CellInfo;
 import android.telephony.CellInfoCdma;
 import android.telephony.CellInfoGsm;
@@ -43,6 +46,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.net.NetworkInterface;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -51,6 +55,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 public class MxcDevicesUtils {
 
@@ -115,6 +120,7 @@ public class MxcDevicesUtils {
         map.put("systemApp", MxcAppTool.isSystemApp(activity) + "");
         map.put("foreground", !MxcAppTool.isAppBackground(activity) + "");
         map.put("running", "true");
+        map.put("uniqueID",getUniqueID(activity));
         map.put("packageName", MxcAppTool.getAppPackageName(activity));
         map.put("name", MxcAppTool.getAppName(activity));
         map.put("versionName", MxcAppTool.getAppVersionName(activity));
@@ -533,6 +539,51 @@ public class MxcDevicesUtils {
         }
         return country;
     }
+
+
+    public static String getUniqueID(Context context) {
+        String id = "";
+        final String androidId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        if (!TextUtils.isEmpty(androidId) && !"9774d56d682e549c".equals(androidId)) {
+            try {
+                UUID uuid = UUID.nameUUIDFromBytes(androidId.getBytes("utf8"));
+                id = uuid.toString();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        if (TextUtils.isEmpty(id)) {
+            id = getUUID(context);
+        }
+        return TextUtils.isEmpty(id) ? UUID.randomUUID().toString() : id;
+    }
+
+    @SuppressLint("MissingPermission")
+    public static String getUUID(Context context) {
+        String serial = "";
+        String m_szDevIDShort = "35" +
+                Build.BOARD.length() % 10 + Build.BRAND.length() % 10 +
+                ((null != Build.CPU_ABI) ? Build.CPU_ABI.length() : 0) % 10 + Build.DEVICE.length() % 10 + Build.DISPLAY.length() % 10 + Build.HOST.length() % 10 + Build.ID.length() % 10 + Build.MANUFACTURER.length() % 10 + Build.MODEL.length() % 10 + Build.PRODUCT.length() % 10 + Build.TAGS.length() % 10 + Build.TYPE.length() % 10 + Build.USER.length() % 10; //13 􏱌
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    if (context.checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                        return "8765421120112";
+                    }
+                    serial = android.os.Build.getSerial();
+                } else {
+                    serial = Build.SERIAL;
+                }
+                return new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
+            } catch (Exception exception) {
+                serial = "serial" + MxcAppTool.getAppName(context);
+            }
+        } else {
+            serial = android.os.Build.UNKNOWN;
+        }
+        return new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
+    }
+
 
     public static String getLanguage() {
         String language = "";
